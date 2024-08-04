@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  bot2:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - SERVER_URL=${SERVER_URL}
+    restart: always
