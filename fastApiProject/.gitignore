@@ -1,0 +1,6 @@
+.env
+venv
+_pycache__/
+.idea/
+etc/
+testdir/dir2/text.txt
