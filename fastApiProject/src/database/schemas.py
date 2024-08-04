@@ -1,7 +1,8 @@
 def individual_data(message):
     return {
         "id": str(message["_id"]),
-        "text": message["text"]
+        "text": message["text"],
+        "from_f": message["from_f"]
     }
 
 

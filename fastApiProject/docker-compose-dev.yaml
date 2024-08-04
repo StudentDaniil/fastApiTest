@@ -1,16 +1,4 @@
 services:
-  web:
-    container_name: "web"
-    image: nginx:alpine
-    depends_on:
-      - app
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./nginx/etc/ssl:/etc/nginx/ssl
-    networks:
-      - custom
   app:
     container_name: "app"
     environment:
@@ -18,8 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    expose:
-      - 8000
+    ports:
+      - "8000:8000"
     networks:
       - custom
     depends_on:

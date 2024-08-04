@@ -2,17 +2,17 @@ from fastapi.routing import APIRoute
 from starlette.requests import Request
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from src.main import app
-
-
-@app.get("/")
-async def mainpage() -> str:
-    return "YOU ARE ON THE MAIN PAGE"
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str) -> dict:
-    return {"message": f"Hello321 {name}"}
+# from src.main import app
+#
+#
+# @app.get("/")
+# async def mainpage() -> str:
+#     return "YOU ARE ON THE MAIN PAGE"
+#
+#
+# @app.get("/hello/{name}")
+# async def say_hello(name: str) -> dict:
+#     return {"message": f"Hello321 {name}"}
 
 # async def create_record(request: Request) -> dict:
 #     mongo_client: AsyncIOMotorClient = request.app.state.mongo_client["test_database"]
