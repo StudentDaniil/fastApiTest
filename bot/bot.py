@@ -6,6 +6,7 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message
 from dotenv import load_dotenv
 
+
 TG_API = os.getenv("TELEGRAM_TOKEN")
 SERVER_URL = os.getenv("SERVER_URL")
 
@@ -15,7 +16,10 @@ dp = Dispatcher()
 
 @dp.message(F.text == "/start")
 async def start(message: Message):
-    await message.answer(f"hello, {message.from_user.first_name}")
+    await message.answer(f"Привет, {message.from_user.first_name}!"
+                         f" Данный бот может запоминать твои сообщения, если ты этого захочешь. Введи 'Создать "
+                         f"сообщение: ' и своё сообщение, бот запомнит его."
+                         f"\nА командой /all_messages выведет все сообщения и их отправителей.")
 
 
 @dp.message(F.text.startswith("Создать сообщение: "))
@@ -36,6 +40,27 @@ async def create_message_bot(message: Message):
     except requests.exceptions.RequestException as e:
         error_message = e.response.text if hasattr(e.response, 'text') else str(e)
         print(error_message)
+        await message.answer(f"Ошибка при создании сообщения!")
+
+
+@dp.message(F.text == "/all_messages")
+async def all_messages(message: Message):
+    try:
+        response = requests.get(''.join([SERVER_URL, "/api/v1/messages/"]))
+        response.raise_for_status()
+        messages = response.json()
+
+        all_messages_str = 'Сообщения: \n'
+
+        for i in messages:
+            msg_text = i.get("text")
+            msg_from_name = i.get("from_f")['username']
+            print(msg_text+msg_from_name)
+            all_messages_str += msg_text + "\nОтправитель: @" + msg_from_name + "\n"
+        await message.answer(all_messages_str)
+
+    except requests.exceptions.RequestException as e:
+        error_message = e.response.text if hasattr(e.response, 'text') else str(e)
         await message.answer(f"Ошибка при создании сообщения!")
 
 
