@@ -1,6 +1,0 @@
-.env
-venv
-_pycache__/
-.idea/
-etc/
-testdir/!dir/
