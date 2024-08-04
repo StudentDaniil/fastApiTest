@@ -3,5 +3,5 @@ venv
 _pycache__/
 .idea/
 etc/
-dir
+dir2
 .gitignore
