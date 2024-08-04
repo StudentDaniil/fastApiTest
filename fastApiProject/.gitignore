@@ -3,5 +3,4 @@ venv
 _pycache__/
 .idea/
 etc/
-dir2
-.gitignore
+testdir/dir2/text.txt
